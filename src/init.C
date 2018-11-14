@@ -1,5 +1,10 @@
 #include "init.H"
 #include "controller.H"
+#include "menu.H"
+#include "option.H"
+#include "selectable.H"
+#include "utils.H"
+#include "viewable.H"
 
 #include <string>
 #include <iostream>
@@ -122,25 +127,9 @@ void init() {
 	menus->push_back(menu5);
 	menus->push_back(menuWIP);
 
-	// for(int i = 0; i < menus->size(); i++) {
-	// 	menus->at(i)->printOptionsList();
-	// }
-
 	controller* myController = new controller();
 	myController->setMenuList(menus);
 	myController->checkUserInput();
-
-	// menu* menuCheck = myController->getMenu(1);
-
-	// menuCheck->printOptionsList();
-
-	// menus[0] = rootMenu;
-	// menus[1] = menu1;
-	// menus[2] = menu2;
-	// menus[3] = menu3;
-	// menus[4] = menu4;
-	// menus[5] = menu5;
-	// menus[6] = menuWIP;
 
 	delete rootMenu;
 	delete menu1;

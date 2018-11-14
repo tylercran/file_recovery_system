@@ -11,6 +11,7 @@ void hello()
   cout << "HI THERE, this is C++" << endl;
 }
 
+// Add error checking for decimal point numbers as well.
 int getInt_range(int min, int max)
 {
   int input;

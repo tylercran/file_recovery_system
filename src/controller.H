@@ -17,14 +17,8 @@ public:
 
 	void checkUserInput();
 
-	void setMenuList(vector<menu*>* menuList) {
-		for(int i = 0; i < menuList->size(); i++) {
-			this->menuList.push_back(menuList->at(i));
-		}
-		this->setCurrentMenu(0);
-	}
-
-	void setCurrentMenu(int option) { currentMenu = *this->getMenu(option); }
+	void setMenuList(vector<menu*>* menuList);
+	void setCurrentMenu(int option);
 
 	void setPrevious() { previousMenu = currentMenu; }
 

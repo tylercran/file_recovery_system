@@ -39,15 +39,7 @@ public:
     
     //getters
     int  getNumOptions() { return options.size(); }
-    void printOptionsList() {
-        cout << this->getTitle();
-
-        for(int i = 1; i < options.size(); i++) {
-            cout << options.at(i)->getText();
-        }
-
-        cout << options[0]->getText();
-    }
+    void printOptionsList();
     string getTitle() { return title; }
     
     //setters
