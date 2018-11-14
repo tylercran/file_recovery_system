@@ -12,6 +12,7 @@
  */
 
 #include "menu.H"
+#include <iostream>
 
 menu::menu() {
 }
@@ -22,9 +23,9 @@ menu::menu(const menu& orig) {
 menu::~menu() {
 }
 
-void printOptionsList() {
+void menu::printOptionsList() {
     for(int i = 1; i < options.size(); i++) {
-        cout << options.at(i)->getText();
+        cout << this->options.at(i)->getText();
     }
 
     cout << options[0]->getText();
@@ -36,7 +37,7 @@ void menu::toString(){
     cout << this->title << endl;
     for(auto i : this->options)
     {
-       cout << ++cnt << ". "
+       cout << ++cnt << ". ";
        i->toString();
        cout << endl;
     }

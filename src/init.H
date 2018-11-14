@@ -1,6 +1,9 @@
 #ifndef INIT_H
 #define INIT_H
 
+#include "viewable.H"
+#include "menuInit.H"
+
 using namespace std;
 
 #if defined (__cplusplus)

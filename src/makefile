@@ -5,7 +5,7 @@ CC       = gcc
 #c++ files use g++
 CXX      = g++
 #will compile with debug flag, will later likely need lpthread and such
-CPPFLAGS = -g 
+CPPFLAGS = -g -std=c++11
 
 
 #defile source files
