@@ -23,6 +23,8 @@ public:
     virtual ~selectable();
     
     virtual void selected() = 0;
+    virtual string getText() = 0;
+    virtual void toString() = 0;
 private:
 
 };

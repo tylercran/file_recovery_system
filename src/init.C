@@ -4,18 +4,27 @@
 #include "option.H"
 #include "selectable.H"
 #include "utils.H"
-#include <string>
+#include "optionsVector.H"
+#include "titleInit.H"
 #include <iostream>
 #include <stdlib.h>
-#include <vector>
 
 void init() {
 
-	viewable* rootMenu = new menu();
-	rootMenu = createMenu(rootTitleString());
+	vector<selectable*> options;
+	selectable* option1 = new option("hi");
+	options.push_back(option1);
+	viewable* rootMenu = new menu(rootTitleString(), options);
 
+	rootMenu->printOptionsList();
 
-	rootMenu->toString();
+	// rootMenu = createMenu(rootTitleString());
+
+	// viewable* menu1 = new menu();
+	// menu1 = createMenu(titleOneString());
+
+	// viewable* menu2 = new menu();
+	// menu2 = createMenu(titleTwoString());
 
 	// option* root_menu_option_0 = new option;
 	// root_menu_option_0->setText("** 0 to close program.\n\n");
@@ -41,12 +50,6 @@ void init() {
 	// rootMenu->addOption(root_menu_option_3);
 	// rootMenu->addOption(root_menu_option_4);
 	// rootMenu->addOption(root_menu_option_5);
-
-	// menu* menu1 = new menu;
-	// menu1->setTitle("\n\n*************************************\n"
-	// 	"** RECOVER ALL FILES FROM MY DRIVE **\n"
-	// 	"*************************************\n\n"
-	// 	"Choose an option.\n\n");
 
 	// menu* menu2 = new menu;
 	// menu2->setTitle("\n\n*********************************************\n"

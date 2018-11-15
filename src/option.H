@@ -24,6 +24,7 @@ using namespace std;
 class option : public viewable, public selectable {
 public:
     option();
+    option(string text);
     option(const option& orig);
     virtual ~option();
         
@@ -33,6 +34,9 @@ public:
     string getText()               { return text; }
     void   setText(string optText) { text = optText; }
     
+    //remove this
+    void printOptionsList();
+
     //selected
     void selected() override;
     

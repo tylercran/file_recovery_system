@@ -20,6 +20,8 @@ public:
     viewable(const viewable& orig);
     virtual ~viewable();
     virtual void toString() = 0;
+    // Remove this
+    virtual void printOptionsList() = 0;
 
 private:
 

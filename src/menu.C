@@ -14,7 +14,12 @@
 #include "menu.H"
 #include <iostream>
 
-menu::menu() {
+menu::menu(){
+}
+
+menu::menu(const string title, vector<selectable*> options) {
+  this->title = title;
+  this->options = options;
 }
 
 menu::menu(const menu& orig) {
@@ -35,8 +40,7 @@ void menu::toString(){
 
     int cnt = 0;
     cout << this->title << endl;
-    for(auto i : this->options)
-    {
+    for(auto i : this->options) {
        cout << ++cnt << ". ";
        i->toString();
        cout << endl;

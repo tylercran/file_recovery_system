@@ -18,14 +18,16 @@
 #include <vector>
 #include "viewable.H"
 #include "option.H"
+#include "selectable.H"
 
 using namespace std;
 
 class menu : public viewable{
 public:
-    
     //ctor
     menu();
+    //alt ctor
+    menu(const string title, vector<selectable*> options);
     //copy
     menu(const menu& orig);
     //dtor
@@ -48,7 +50,7 @@ public:
 private:
     
     string title;
-    vector<option*> options;
+    vector<selectable*> options;
 };
 
 #endif /* MENU_H */

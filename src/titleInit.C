@@ -18,3 +18,20 @@ string rootTitleString() {
 		"** Please select what you would like to do from the options below. To select an option, type the number\n**"
 		"that corresponds with the option you would like to use and press enter:\n\n";
 }
+
+string titleOneString() {
+	return "\n\n*************************************\n"
+		"** RECOVER ALL FILES FROM MY DRIVE **\n"
+		"*************************************\n\n"
+		"Choose an option.\n\n";
+}
+
+string titleTwoString();
+
+string titleThreeString();
+
+string titleFourString();
+
+string titleFiveString();
+
+string wIPString();

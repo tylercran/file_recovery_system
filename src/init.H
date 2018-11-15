@@ -2,7 +2,8 @@
 #define INIT_H
 
 #include "viewable.H"
-#include "menuInit.H"
+#include <string>
+#include <vector>
 
 using namespace std;
 

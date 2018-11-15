@@ -16,10 +16,18 @@
 option::option() {
 }
 
+option::option(string text) {
+    this->text = text;
+}
+
 option::option(const option& orig) {
 }
 
 option::~option() {
+}
+
+//remove this
+void option::printOptionsList(){
 }
 
 void option::toString(){
