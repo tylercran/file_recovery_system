@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-int main()
+void findDrives()
 {
 
   FILE *fp;
@@ -25,6 +25,4 @@ int main()
 
   /* close */
   pclose(fp);
-
-  return 0;
 }
