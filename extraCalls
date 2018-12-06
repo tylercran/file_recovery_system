@@ -1,0 +1,8 @@
+Creating an image of a drive:
+  dd if=<driveLocation> of=<pathToImage/imageName.img> bs=1M count=<sizeOf.imgInBytes>
+
+  where:
+	  bs is how many bytes to write at a time.
+	  Count is how many megabytes
+	  if is the drive to create an image of (typically uses /dev/<sdb/sda/sdc/etc)
+	  of is the name of the image.
