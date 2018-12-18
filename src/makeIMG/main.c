@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../utils.H"
+#include "utils.H"
 
 FILE* f;
 char imgLoc [1024] = {'\0'};
