@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ty/CLionProjects/untitled1
+CMAKE_SOURCE_DIR = /home/ty/Desktop/file_recovery_system
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ty/CLionProjects/untitled1/build
+CMAKE_BINARY_DIR = /home/ty/Desktop/file_recovery_system/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/untitled1.dir/depend.make
@@ -57,157 +57,7 @@ include CMakeFiles/untitled1.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/untitled1.dir/flags.make
 
-CMakeFiles/untitled1.dir/main.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ty/CLionProjects/untitled1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled1.dir/main.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/main.cpp.o -c /home/ty/CLionProjects/untitled1/main.cpp
-
-CMakeFiles/untitled1.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/main.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ty/CLionProjects/untitled1/main.cpp > CMakeFiles/untitled1.dir/main.cpp.i
-
-CMakeFiles/untitled1.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/main.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ty/CLionProjects/untitled1/main.cpp -o CMakeFiles/untitled1.dir/main.cpp.s
-
-CMakeFiles/untitled1.dir/main.cpp.o.requires:
-
-.PHONY : CMakeFiles/untitled1.dir/main.cpp.o.requires
-
-CMakeFiles/untitled1.dir/main.cpp.o.provides: CMakeFiles/untitled1.dir/main.cpp.o.requires
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.o.provides.build
-.PHONY : CMakeFiles/untitled1.dir/main.cpp.o.provides
-
-CMakeFiles/untitled1.dir/main.cpp.o.provides.build: CMakeFiles/untitled1.dir/main.cpp.o
-
-
-CMakeFiles/untitled1.dir/Path.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/Path.cpp.o: ../Path.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ty/CLionProjects/untitled1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/untitled1.dir/Path.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/Path.cpp.o -c /home/ty/CLionProjects/untitled1/Path.cpp
-
-CMakeFiles/untitled1.dir/Path.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/Path.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ty/CLionProjects/untitled1/Path.cpp > CMakeFiles/untitled1.dir/Path.cpp.i
-
-CMakeFiles/untitled1.dir/Path.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/Path.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ty/CLionProjects/untitled1/Path.cpp -o CMakeFiles/untitled1.dir/Path.cpp.s
-
-CMakeFiles/untitled1.dir/Path.cpp.o.requires:
-
-.PHONY : CMakeFiles/untitled1.dir/Path.cpp.o.requires
-
-CMakeFiles/untitled1.dir/Path.cpp.o.provides: CMakeFiles/untitled1.dir/Path.cpp.o.requires
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Path.cpp.o.provides.build
-.PHONY : CMakeFiles/untitled1.dir/Path.cpp.o.provides
-
-CMakeFiles/untitled1.dir/Path.cpp.o.provides.build: CMakeFiles/untitled1.dir/Path.cpp.o
-
-
-CMakeFiles/untitled1.dir/File.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/File.cpp.o: ../File.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ty/CLionProjects/untitled1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/untitled1.dir/File.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/File.cpp.o -c /home/ty/CLionProjects/untitled1/File.cpp
-
-CMakeFiles/untitled1.dir/File.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/File.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ty/CLionProjects/untitled1/File.cpp > CMakeFiles/untitled1.dir/File.cpp.i
-
-CMakeFiles/untitled1.dir/File.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/File.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ty/CLionProjects/untitled1/File.cpp -o CMakeFiles/untitled1.dir/File.cpp.s
-
-CMakeFiles/untitled1.dir/File.cpp.o.requires:
-
-.PHONY : CMakeFiles/untitled1.dir/File.cpp.o.requires
-
-CMakeFiles/untitled1.dir/File.cpp.o.provides: CMakeFiles/untitled1.dir/File.cpp.o.requires
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/File.cpp.o.provides.build
-.PHONY : CMakeFiles/untitled1.dir/File.cpp.o.provides
-
-CMakeFiles/untitled1.dir/File.cpp.o.provides.build: CMakeFiles/untitled1.dir/File.cpp.o
-
-
-CMakeFiles/untitled1.dir/FileSystem.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/FileSystem.cpp.o: ../FileSystem.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ty/CLionProjects/untitled1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/untitled1.dir/FileSystem.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/FileSystem.cpp.o -c /home/ty/CLionProjects/untitled1/FileSystem.cpp
-
-CMakeFiles/untitled1.dir/FileSystem.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/FileSystem.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ty/CLionProjects/untitled1/FileSystem.cpp > CMakeFiles/untitled1.dir/FileSystem.cpp.i
-
-CMakeFiles/untitled1.dir/FileSystem.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/FileSystem.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ty/CLionProjects/untitled1/FileSystem.cpp -o CMakeFiles/untitled1.dir/FileSystem.cpp.s
-
-CMakeFiles/untitled1.dir/FileSystem.cpp.o.requires:
-
-.PHONY : CMakeFiles/untitled1.dir/FileSystem.cpp.o.requires
-
-CMakeFiles/untitled1.dir/FileSystem.cpp.o.provides: CMakeFiles/untitled1.dir/FileSystem.cpp.o.requires
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/FileSystem.cpp.o.provides.build
-.PHONY : CMakeFiles/untitled1.dir/FileSystem.cpp.o.provides
-
-CMakeFiles/untitled1.dir/FileSystem.cpp.o.provides.build: CMakeFiles/untitled1.dir/FileSystem.cpp.o
-
-
-CMakeFiles/untitled1.dir/Entry.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/Entry.cpp.o: ../Entry.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/ty/CLionProjects/untitled1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/untitled1.dir/Entry.cpp.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled1.dir/Entry.cpp.o -c /home/ty/CLionProjects/untitled1/Entry.cpp
-
-CMakeFiles/untitled1.dir/Entry.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/Entry.cpp.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/ty/CLionProjects/untitled1/Entry.cpp > CMakeFiles/untitled1.dir/Entry.cpp.i
-
-CMakeFiles/untitled1.dir/Entry.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/Entry.cpp.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/ty/CLionProjects/untitled1/Entry.cpp -o CMakeFiles/untitled1.dir/Entry.cpp.s
-
-CMakeFiles/untitled1.dir/Entry.cpp.o.requires:
-
-.PHONY : CMakeFiles/untitled1.dir/Entry.cpp.o.requires
-
-CMakeFiles/untitled1.dir/Entry.cpp.o.provides: CMakeFiles/untitled1.dir/Entry.cpp.o.requires
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Entry.cpp.o.provides.build
-.PHONY : CMakeFiles/untitled1.dir/Entry.cpp.o.provides
-
-CMakeFiles/untitled1.dir/Entry.cpp.o.provides.build: CMakeFiles/untitled1.dir/Entry.cpp.o
-
-
-# Object files for target untitled1
-untitled1_OBJECTS = \
-"CMakeFiles/untitled1.dir/main.cpp.o" \
-"CMakeFiles/untitled1.dir/Path.cpp.o" \
-"CMakeFiles/untitled1.dir/File.cpp.o" \
-"CMakeFiles/untitled1.dir/FileSystem.cpp.o" \
-"CMakeFiles/untitled1.dir/Entry.cpp.o"
-
-# External object files for target untitled1
-untitled1_EXTERNAL_OBJECTS =
-
-untitled1: CMakeFiles/untitled1.dir/main.cpp.o
-untitled1: CMakeFiles/untitled1.dir/Path.cpp.o
-untitled1: CMakeFiles/untitled1.dir/File.cpp.o
-untitled1: CMakeFiles/untitled1.dir/FileSystem.cpp.o
-untitled1: CMakeFiles/untitled1.dir/Entry.cpp.o
-untitled1: CMakeFiles/untitled1.dir/build.make
-untitled1: CMakeFiles/untitled1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/ty/CLionProjects/untitled1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable untitled1"
-	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/untitled1.dir/link.txt --verbose=$(VERBOSE)
-
-# Rule to build all files generated by this target.
-CMakeFiles/untitled1.dir/build: untitled1
-
-.PHONY : CMakeFiles/untitled1.dir/build
-
-CMakeFiles/untitled1.dir/requires: CMakeFiles/untitled1.dir/main.cpp.o.requires
-CMakeFiles/untitled1.dir/requires: CMakeFiles/untitled1.dir/Path.cpp.o.requires
-CMakeFiles/untitled1.dir/requires: CMakeFiles/untitled1.dir/File.cpp.o.requires
-CMakeFiles/untitled1.dir/requires: CMakeFiles/untitled1.dir/FileSystem.cpp.o.requires
-CMakeFiles/untitled1.dir/requires: CMakeFiles/untitled1.dir/Entry.cpp.o.requires
+CMakeFiles/untitled1.dir/requires:
 
 .PHONY : CMakeFiles/untitled1.dir/requires
 
@@ -216,6 +66,6 @@ CMakeFiles/untitled1.dir/clean:
 .PHONY : CMakeFiles/untitled1.dir/clean
 
 CMakeFiles/untitled1.dir/depend:
-	cd /home/ty/CLionProjects/untitled1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ty/CLionProjects/untitled1 /home/ty/CLionProjects/untitled1 /home/ty/CLionProjects/untitled1/build /home/ty/CLionProjects/untitled1/build /home/ty/CLionProjects/untitled1/build/CMakeFiles/untitled1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ty/Desktop/file_recovery_system/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ty/Desktop/file_recovery_system /home/ty/Desktop/file_recovery_system /home/ty/Desktop/file_recovery_system/build /home/ty/Desktop/file_recovery_system/build /home/ty/Desktop/file_recovery_system/build/CMakeFiles/untitled1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/untitled1.dir/depend
 

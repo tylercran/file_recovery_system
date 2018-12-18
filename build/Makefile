@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ty/CLionProjects/untitled1
+CMAKE_SOURCE_DIR = /home/ty/Desktop/file_recovery_system
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ty/CLionProjects/untitled1/build
+CMAKE_BINARY_DIR = /home/ty/Desktop/file_recovery_system/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ty/CLionProjects/untitled1/build/CMakeFiles /home/ty/CLionProjects/untitled1/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ty/Desktop/file_recovery_system/build/CMakeFiles /home/ty/Desktop/file_recovery_system/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ty/CLionProjects/untitled1/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ty/Desktop/file_recovery_system/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,141 +123,6 @@ untitled1/fast:
 	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/build
 .PHONY : untitled1/fast
 
-Entry.o: Entry.cpp.o
-
-.PHONY : Entry.o
-
-# target to build an object file
-Entry.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Entry.cpp.o
-.PHONY : Entry.cpp.o
-
-Entry.i: Entry.cpp.i
-
-.PHONY : Entry.i
-
-# target to preprocess a source file
-Entry.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Entry.cpp.i
-.PHONY : Entry.cpp.i
-
-Entry.s: Entry.cpp.s
-
-.PHONY : Entry.s
-
-# target to generate assembly for a file
-Entry.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Entry.cpp.s
-.PHONY : Entry.cpp.s
-
-File.o: File.cpp.o
-
-.PHONY : File.o
-
-# target to build an object file
-File.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/File.cpp.o
-.PHONY : File.cpp.o
-
-File.i: File.cpp.i
-
-.PHONY : File.i
-
-# target to preprocess a source file
-File.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/File.cpp.i
-.PHONY : File.cpp.i
-
-File.s: File.cpp.s
-
-.PHONY : File.s
-
-# target to generate assembly for a file
-File.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/File.cpp.s
-.PHONY : File.cpp.s
-
-FileSystem.o: FileSystem.cpp.o
-
-.PHONY : FileSystem.o
-
-# target to build an object file
-FileSystem.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/FileSystem.cpp.o
-.PHONY : FileSystem.cpp.o
-
-FileSystem.i: FileSystem.cpp.i
-
-.PHONY : FileSystem.i
-
-# target to preprocess a source file
-FileSystem.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/FileSystem.cpp.i
-.PHONY : FileSystem.cpp.i
-
-FileSystem.s: FileSystem.cpp.s
-
-.PHONY : FileSystem.s
-
-# target to generate assembly for a file
-FileSystem.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/FileSystem.cpp.s
-.PHONY : FileSystem.cpp.s
-
-Path.o: Path.cpp.o
-
-.PHONY : Path.o
-
-# target to build an object file
-Path.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Path.cpp.o
-.PHONY : Path.cpp.o
-
-Path.i: Path.cpp.i
-
-.PHONY : Path.i
-
-# target to preprocess a source file
-Path.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Path.cpp.i
-.PHONY : Path.cpp.i
-
-Path.s: Path.cpp.s
-
-.PHONY : Path.s
-
-# target to generate assembly for a file
-Path.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/Path.cpp.s
-.PHONY : Path.cpp.s
-
-main.o: main.cpp.o
-
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.s
-.PHONY : main.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -267,21 +132,6 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... untitled1"
-	@echo "... Entry.o"
-	@echo "... Entry.i"
-	@echo "... Entry.s"
-	@echo "... File.o"
-	@echo "... File.i"
-	@echo "... File.s"
-	@echo "... FileSystem.o"
-	@echo "... FileSystem.i"
-	@echo "... FileSystem.s"
-	@echo "... Path.o"
-	@echo "... Path.i"
-	@echo "... Path.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
 .PHONY : help
 
 
