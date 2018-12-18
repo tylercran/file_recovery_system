@@ -40,20 +40,25 @@ public:
 
     int readData(unsigned long long address, char *buffer, int size);
 
-    unsigned long long clusterAddress(unsigned int cluster, bool isRoot);
+    unsigned long long clusterAddress(unsigned int cluster, bool isRoot = NULL);
 
     bool validCluster(unsigned int cluster);
 
-    vector<Entry> getEntries(unsigned int cluster, int *clusters = NULL, bool *hasFree = NULL);
+    vector<Entry> getEntries(unsigned int cluster, int *clusters = NULL, bool *hasFree = NULL, bool deletedFlag = NULL);
 
-    void list(vector<Entry> &entries);
-    void list(Path &path);
-    void list(unsigned int cluster);
-    void listDeleted(vector<Entry> &entries);
+    void list(vector<Entry> &entries, string curPath = "/", int depth = 0);
+    void list(Path &path, int depth = 0, bool deletedFlag = NULL);
+    void list(unsigned int cluster, string curPath = "/", int depth = 0, bool deletedFlag = NULL);
 
     bool findDirectory(Path &path, Entry &outputEntry);
 
     unsigned int nextCluster(unsigned int cluster, int fat=0);
+
+    vector<Entry> getDeletedList();
+    void listDeletedEntries();
+
+    void confirmUndelete(vector<Entry> entries);
+    void undelete(Entry entry);
 
 private:
     string imageName;
@@ -91,6 +96,8 @@ private:
     // Stats values
     bool statsComputed;
     unsigned long long freeClusters;
+
+    vector<Entry> deletedEntries;
 
 
 };

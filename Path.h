@@ -20,6 +20,8 @@ public:
 
     string getGivenPath();
 
+    void setGivenPath(string addOn);
+
 private:
     string givenPath;
     vector<string> previousDirs;

@@ -1,0 +1,1 @@
+/usr/bin/c++   -g   CMakeFiles/untitled1.dir/main.cpp.o CMakeFiles/untitled1.dir/Path.cpp.o CMakeFiles/untitled1.dir/File.cpp.o CMakeFiles/untitled1.dir/FileSystem.cpp.o CMakeFiles/untitled1.dir/Entry.cpp.o  -o untitled1 -rdynamic 

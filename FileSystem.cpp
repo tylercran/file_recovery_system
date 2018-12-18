@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <iostream>
 #include <set>
+#include <algorithm>
 
 #include "Utils.h"
 #include "FileSystem.h"
@@ -15,8 +16,12 @@
 #include "Entry.h"
 #include "File.h"
 
-FileSystem::FileSystem(string userImage):imageName(userImage){
+FileSystem::FileSystem(string userImage) : imageName(userImage) {
     file = open(imageName.c_str(), O_RDONLY | O_LARGEFILE);
+    if (!file) {
+        cout << "Could not open file";
+        exit(0);
+    }
 }
 
 bool FileSystem::init() {
@@ -36,10 +41,10 @@ bool FileSystem::init() {
 }
 
 void FileSystem::parseHeader() {
-    char buffer[64];
+    char buffer[128];
 
     readData(0x0, buffer, sizeof(buffer));
-    sectorBytes = 512;
+    sectorBytes = READ_SHORT(buffer, BYTES_PER_SECTOR)&0xffff;
     // For FAT32, this is going to be 64 if the drive is smaller than 2tb, 32 if it's smaller than 32 gb, 16 if it's
     // smaller than 16 gb, 8 if it's smaller than 8gb, and 1 if it's smaller than 260MB.
     numSectorsInCluster = buffer[SECTORS_PER_CLUSTER] & 0xff;
@@ -100,71 +105,26 @@ int FileSystem::readData(unsigned long long address, char *buffer, int size) {
     return n;
 }
 
-void FileSystem::list(vector<Entry> &entries)
-{
-    vector<Entry>::iterator it;
+void FileSystem::list(Path &path, int depth, bool deletedFlag) {
+    Entry entry;
+    string curPath = path.getGivenPath();
 
-    for (it=entries.begin(); it!=entries.end(); it++) {
-        Entry &entry = *it;
-
-//        if (entry.isDeleted()) {
-//            continue;
-//        }
-
-        if(entry.isDeleted()) {
-            printf("\nNext is deleted. \n");
-        }
-        if (entry.isDirectory()) {
-            printf("d");
-        } else {
-            printf("f");
-        }
-
-        string name = entry.getFilename();
-        if (entry.isDirectory()) {
-            name += "/";
-        }
-
-        printf(" %-30s", name.c_str());
-
-        printf(" c=%u", entry.cluster);
-
-        if (!entry.isDirectory()) {
-            string pretty = prettySize(entry.size);
-            printf(" s=%llu (%s)", entry.size, pretty.c_str());
-        }
-
-        if (entry.isHidden()) {
-            printf(" h");
-        }
-
-        if(entry.isDeleted()) {
-            printf("\n");
-        }
-
-        printf("\n");
-        fflush(stdout);
+    if (findDirectory(path, entry)) {
+        list(entry.cluster, curPath, depth, deletedFlag);
     }
 }
 
-unsigned long long FileSystem::clusterAddress(unsigned int cluster, bool isRoot)
-{
-    if (type == FAT32 || !isRoot) {
-        cluster -= 2;
+void FileSystem::list(unsigned int cluster, string curPath, int depth, bool deletedFlag) {
+    bool hasFree = false;
+    vector<Entry> entries = getEntries(cluster, NULL, &hasFree, deletedFlag);
+    //printf("Directory cluster: %u\n", cluster);
+    if (hasFree) {
+        printf("Warning: this directory has free clusters that was read contiguously\n");
     }
-
-    unsigned long long addr = (dataStart + sectorBytes*numSectorsInCluster*cluster);
-
-    return addr;
+    list(entries, curPath, depth);
 }
 
-bool FileSystem::validCluster(unsigned int cluster)
-{
-    return cluster < totalClusters;
-}
-
-vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *hasFree)
-{
+vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *hasFree, bool deletedFlag) {
     bool isRoot = false;
     bool contiguous = false;
     int foundEntries = 0;
@@ -186,7 +146,7 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
         cluster = rootDirectory;
     }
 
-    isRoot = (type==0 && cluster==rootDirectory);
+    isRoot = (type == 0 && cluster == rootDirectory);
 
     if (cluster == rootDirectory) {
         isValid = true;
@@ -209,7 +169,7 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
         visited.insert(cluster);
 
         unsigned int i;
-        for (i=0; i<bytesPerCluster; i+=sizeof(buffer)) {
+        for (i = 0; i < bytesPerCluster; i += sizeof(buffer)) {
             // Reading data
             readData(address, buffer, sizeof(buffer));
 
@@ -225,13 +185,18 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
             } else {
                 entry.shortName = string(buffer, 11);
                 entry.longName = filename.getFilename();
-                entry.size = READ_LONG(buffer, FILESIZE)&0xffffffff;
-                entry.cluster = (READ_SHORT(buffer, CLUSTER_LOW)&0xffff) | (READ_SHORT(buffer, CLUSTER_HIGH)<<16);
+                entry.size = READ_LONG(buffer, FILESIZE) & 0xffffffff;
+                entry.cluster = (READ_SHORT(buffer, CLUSTER_LOW) & 0xffff) | (READ_SHORT(buffer, CLUSTER_HIGH) << 16);
                 entry.setData(string(buffer, sizeof(buffer)));
 
                 if (!entry.isZero()) {
                     if (entry.isCorrect() && validCluster(entry.cluster)) {
-                        entries.push_back(entry);
+                        if (entry.isDeleted()) {
+                            if(deletedFlag)
+                                entries.push_back(entry);
+                        } else if(!entry.isDeleted() && !deletedFlag){
+                            entries.push_back(entry);
+                        }
                         localFound++;
                         foundEntries++;
 
@@ -255,7 +220,7 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
         int previousCluster = cluster;
 
         if (isRoot) {
-            if (cluster+1 < rootClusters) {
+            if (cluster + 1 < rootClusters) {
                 cluster++;
             } else {
                 cluster = LAST;
@@ -274,8 +239,8 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
             if (hasFree != NULL) {
                 *hasFree = true;
             }
-            if (!localZero && localFound && localBadEntries<localFound) {
-                cluster = previousCluster+1;
+            if (!localZero && localFound && localBadEntries < localFound) {
+                cluster = previousCluster + 1;
             } else {
                 if (!localFound && clusters) {
                     (*clusters)--;
@@ -285,7 +250,7 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
         }
 
         if (!isValid) {
-            if (badEntries>foundEntries) {
+            if (badEntries > foundEntries) {
                 cerr << "! Entries don't look good, this is maybe not a directory" << endl;
                 return vector<Entry>();
             }
@@ -295,42 +260,137 @@ vector<Entry> FileSystem::getEntries(unsigned int cluster, int *clusters, bool *
     return entries;
 }
 
+unsigned long long FileSystem::clusterAddress(unsigned int cluster, bool isRoot) {
+    if (type == FAT32 || !isRoot) {
+        cluster -= 2;
+    }
 
-void FileSystem::list(Path &path)
-{
-    Entry entry;
+    unsigned long long addr = (dataStart + sectorBytes * numSectorsInCluster * cluster);
 
-    if (findDirectory(path, entry)) {
-        list(entry.cluster);
+    return addr;
+}
+
+unsigned int FileSystem::nextCluster(unsigned int cluster, int fat) {
+    int bytes = (bits == 32 ? 4 : 2);
+    char buffer[bytes];
+
+    if (!validCluster(cluster)) {
+        return 0;
+    }
+
+    readData(start + dataSize * fat + (bits * cluster) / 8, buffer, sizeof(buffer));
+
+    unsigned int next;
+
+    if (type == FAT32) {
+        next = READ_LONG(buffer, 0) & 0x0fffffff;
+
+        if (next >= 0x0ffffff0) {
+            return LAST;
+        } else {
+            return next;
+        }
+    } else {
+        next = READ_SHORT(buffer, 0) & 0xffff;
+
+        if (bits == 12) {
+            int bit = cluster * bits;
+            if (bit % 8 != 0) {
+                next = next >> 4;
+            }
+            next &= 0xfff;
+            if (next >= 0xff0) {
+                return LAST;
+            } else {
+                return next;
+            }
+        } else {
+            if (next >= 0xfff0) {
+                return LAST;
+            } else {
+                return next;
+            }
+        }
     }
 }
 
-void FileSystem::list(unsigned int cluster)
-{
-    bool hasFree = false;
-    vector<Entry> entries = getEntries(cluster, NULL, &hasFree);
-    printf("Directory cluster: %u\n", cluster);
-    if (hasFree) {
-        printf("Warning: this directory has free clusters that was read contiguously\n");
-    }
-    list(entries);
+bool FileSystem::validCluster(unsigned int cluster) {
+    return cluster < totalClusters;
 }
 
-bool FileSystem::findDirectory(Path &path, Entry &outputEntry)
-{
+void FileSystem::list(vector<Entry> &entries, string curPath, int depth) {
+    vector<Entry>::iterator it;
+
+    for (it = entries.begin(); it != entries.end(); it++) {
+        Entry &entry = *it;
+
+        if (entry.getFilename() == "." || entry.getFilename() == "..") {
+            continue;
+        }
+
+        if (depth >= 1) {
+            printf("|");
+        }
+
+        for (int i = 0; i < depth; i++) {
+            printf("_");
+        }
+
+        if (entry.isDirectory()) {
+            printf("d");
+        } else {
+            printf("f");
+        }
+
+        string name = entry.getFilename();
+
+        printf(" %-30s", name.c_str());
+
+        //printf(" c=%u", entry.cluster);
+
+//        if (!entry.isDirectory()) {
+//            string pretty = prettySize(entry.size);
+//            printf(" s=%llu (%s)", entry.size, pretty.c_str());
+//        }
+
+        if (entry.isHidden()) {
+            printf(" h");
+        }
+
+        printf("\n");
+
+        fflush(stdout);
+
+        if (entry.isDirectory()) {
+            Path path("");
+            if (depth == 0) {
+                Path newPath(curPath + entry.getFilename());
+                path = newPath;
+            } else {
+                Path newPath(curPath + "/" + entry.getFilename());
+                path = newPath;
+            }
+            depth++;
+            list(path, depth);
+            depth--;
+        }
+    }
+}
+
+bool FileSystem::findDirectory(Path &path, Entry &outputEntry) {
     int cluster;
     vector<string> parts = path.getPreviousDirs();
     cluster = rootDirectory;
     outputEntry.cluster = cluster;
 
-    for (int i=0; i<parts.size(); i++) {
+    for (int i = 0; i < parts.size(); i++) {
         if (parts[i] != "") {
             parts[i] = strtolower(parts[i]);
             vector<Entry> entries = getEntries(cluster);
             vector<Entry>::iterator it;
             bool found = false;
 
-            for (it=entries.begin(); it!=entries.end(); it++) {
+            for (it = entries.begin(); it != entries.end(); it++) {
                 Entry &entry = *it;
                 string name = entry.getFilename();
                 if (entry.isDirectory() && strtolower(name) == parts[i]) {
@@ -350,47 +410,86 @@ bool FileSystem::findDirectory(Path &path, Entry &outputEntry)
     return true;
 }
 
-unsigned int FileSystem::nextCluster(unsigned int cluster, int fat)
-{
-    int bytes = (bits == 32 ? 4 : 2);
-    char buffer[bytes];
+vector<Entry> FileSystem::getDeletedList() {
+    return this->deletedEntries;
+}
 
-    if (!validCluster(cluster)) {
-        return 0;
+void FileSystem::listDeletedEntries() {
+    list(this->deletedEntries, "", 0);
+}
+
+void FileSystem::confirmUndelete(vector<Entry> entries) {
+    cout << "Would you like to restore all files? (Y/N)\n";
+    char choice;
+    cin >> choice;
+
+    if (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+        do {
+            cout << "Please enter Y or N.\n";
+            cin >> choice;
+        } while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n');
+    }
+    if (choice == 'y' || choice == 'Y') {
+        cout << "Recovering all files...\n";
+        // TODO: Make a loop and send each file into the call.
+        vector<Entry>::iterator it;
+        for(it = entries.begin(); it != entries.end(); it++) {
+            Entry &entry = *it;
+            undelete(entry);
+        }
+    } else if (choice == 'n' || choice == 'N') {
+        cout << "Listing all possible files to recover.\n";
+        vector<Entry>::iterator it;
+        for(it = entries.begin(); it != entries.end(); it++) {
+            Entry &entry = *it;
+            if(entry.longName == "") {
+                cout << "Would you like to recover <nameless file>? (Y/N)\n";
+            }
+            else {
+                cout << "Would you like to recover " + entry.longName + "? (Y/N)\n";
+            }
+            cin >> choice;
+            if (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+                do {
+                    cout << "Please enter Y or N.";
+                    cin >> choice;
+                } while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n');
+            }
+            if(choice == 'y' || choice == 'Y') {
+                undelete(entry);
+            }
+            else if (choice == 'n' || choice == 'N') {
+                continue;
+            }
+        }
+    }
+}
+
+void FileSystem::undelete(Entry entry) {
+    if(entry.longName == "") {
+        cout << "Recovering <nameless file>...\n";
+    }else {
+        cout << "Recovering " + entry.longName + "...\n";
     }
 
-    readData(start+dataSize*fat+(bits*cluster)/8, buffer, sizeof(buffer));
+    int curCluster = entry.cluster;
+    int sizeToRead = entry.size;
 
-    unsigned int next;
+    string fileName = "/home/ty/Desktop/WrittenFiles/";
+    fileName.append(entry.longName);
 
-    if (type == FAT32) {
-        next = READ_LONG(buffer, 0)&0x0fffffff;
+    char buffer[sizeToRead];
+    FILE *newFile = fopen(fileName.c_str(), "w+");
 
-        if (next >= 0x0ffffff0) {
-            return LAST;
-        } else {
-            return next;
-        }
+    readData(clusterAddress(curCluster), buffer, sizeToRead);
+
+    fwrite(buffer, sizeToRead, 1, newFile);
+
+    fclose(newFile);
+
+    if(entry.longName == "") {
+        cout << "Finished recovering <nameless file>!\n";
     } else {
-        next = READ_SHORT(buffer,0)&0xffff;
-
-        if (bits == 12) {
-            int bit = cluster*bits;
-            if (bit%8 != 0) {
-                next = next >> 4;
-            }
-            next &= 0xfff;
-            if (next >= 0xff0) {
-                return LAST;
-            } else {
-                return next;
-            }
-        } else {
-            if (next >= 0xfff0) {
-                return LAST;
-            } else {
-                return next;
-            }
-        }
+        cout << "Finished recovering " + entry.longName + "!\n";
     }
 }

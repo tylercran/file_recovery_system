@@ -36,3 +36,7 @@ string Path::getGivenPath() {
 vector<string> Path::getPreviousDirs(){
     return previousDirs;
 }
+
+void Path::setGivenPath(string addOn) {
+    givenPath += "/" + addOn;
+}
